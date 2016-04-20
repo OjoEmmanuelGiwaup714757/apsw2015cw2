@@ -5,17 +5,18 @@
  */
 package pers;
 
-import ents.Milestone;
+import ents.Milestones;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Pavilion
+ * @author Gooloo
  */
 @Stateless
-public class MilestoneFacade extends AbstractFacade<Milestone> {
+public class MilestoneFacade extends AbstractFacade<Milestones> {
+
     @PersistenceContext(unitName = "apsw2015cw2PU")
     private EntityManager em;
 
@@ -25,7 +26,7 @@ public class MilestoneFacade extends AbstractFacade<Milestone> {
     }
 
     public MilestoneFacade() {
-        super(Milestone.class);
+        super(Milestones.class);
     }
     
 }

@@ -12,10 +12,11 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Pavilion
+ * @author Gooloo
  */
 @Stateless
 public class MilestonetemplateFacade extends AbstractFacade<Milestonetemplate> {
+
     @PersistenceContext(unitName = "apsw2015cw2PU")
     private EntityManager em;
 

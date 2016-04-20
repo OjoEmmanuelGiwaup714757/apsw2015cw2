@@ -12,10 +12,11 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Pavilion
+ * @author Gooloo
  */
 @Stateless
 public class MilestonefeedbackFacade extends AbstractFacade<Milestonefeedback> {
+
     @PersistenceContext(unitName = "apsw2015cw2PU")
     private EntityManager em;
 
