@@ -5,128 +5,54 @@
  */
 package ents;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
- * @author Gooloo
+ * @author up792072
  */
 @Entity
-@Table(name = "MILESTONE")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Milestone.findAll", query = "SELECT m FROM Milestone m"),
-    @NamedQuery(name = "Milestone.findByMilestoneid", query = "SELECT m FROM Milestone m WHERE m.milestoneid = :milestoneid"),
-    @NamedQuery(name = "Milestone.findByMilestonetemplateid", query = "SELECT m FROM Milestone m WHERE m.milestonetemplateid = :milestonetemplateid"),
-    @NamedQuery(name = "Milestone.findBySubmissiondate", query = "SELECT m FROM Milestone m WHERE m.submissiondate = :submissiondate"),
-    @NamedQuery(name = "Milestone.findByStudentid", query = "SELECT m FROM Milestone m WHERE m.studentid = :studentid")})
 public class Milestones implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "MILESTONEID")
-    private Integer milestoneid;
-    @Lob
-    @Size(max = 32700)
-    @Column(name = "SUBMISSIONCOMMENTS")
-    private String submissioncomments;
-    @Lob
-    @Column(name = "FILEPART")
-    private String filepart;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MILESTONETEMPLATEID")
-    private int milestonetemplateid;
-    @Column(name = "SUBMISSIONDATE")
-    @Temporal(TemporalType.TIMESTAMP)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String filepath;
+    private String comment;
     private Date submissiondate;
-    @Size(max = 255)
-    @Column(name = "STUDENTID")
-    private String studentid;
 
-    public Milestones() {
+    @ManyToOne
+    private Milestonetemplate belongtemplate;
+
+    @ManyToOne
+    private Shortlist finalproject;
+//    @ManyToOne
+//    private Registation milestoneowner;
+    
+    @OneToMany(mappedBy="belongfeedback")
+    private List<Milestonefeedback> myfeedback;
+
+    public Long getId() {
+        return id;
     }
 
-    public Milestones(Integer milestoneid) {
-        this.milestoneid = milestoneid;
-    }
-
-    public Milestones(Integer milestoneid, int milestonetemplateid) {
-        this.milestoneid = milestoneid;
-        this.milestonetemplateid = milestonetemplateid;
-    }
-
-    public Integer getMilestoneid() {
-        return milestoneid;
-    }
-
-    public void setMilestoneid(Integer milestoneid) {
-        this.milestoneid = milestoneid;
-    }
-
-    public String getSubmissioncomments() {
-        return submissioncomments;
-    }
-
-    public void setSubmissioncomments(String submissioncomments) {
-        this.submissioncomments = submissioncomments;
-    }
-
-    public String getFilepart() {
-        return filepart;
-    }
-
-    public void setFilepart(String filepart) {
-        this.filepart = filepart;
-    }
-
-    public int getMilestonetemplateid() {
-        return milestonetemplateid;
-    }
-
-    public void setMilestonetemplateid(int milestonetemplateid) {
-        this.milestonetemplateid = milestonetemplateid;
-    }
-
-    public Date getSubmissiondate() {
-        return submissiondate;
-    }
-
-    public void setSubmissiondate(Date submissiondate) {
-        this.submissiondate = submissiondate;
-    }
-
-    public String getStudentid() {
-        return studentid;
-    }
-
-    public void setStudentid(String studentid) {
-        this.studentid = studentid;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (milestoneid != null ? milestoneid.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -137,7 +63,7 @@ public class Milestones implements Serializable {
             return false;
         }
         Milestones other = (Milestones) object;
-        if ((this.milestoneid == null && other.milestoneid != null) || (this.milestoneid != null && !this.milestoneid.equals(other.milestoneid))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -145,11 +71,7 @@ public class Milestones implements Serializable {
 
     @Override
     public String toString() {
-        return "ents.Milestone[ milestoneid=" + milestoneid + " ]";
+        return "ents.Milestones[ id=" + id + " ]";
     }
 
-    public void setFilepart(File afile) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
