@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+         <title>Students and Units Management System</title>
+         <link href="../resources/css/mycss.css" rel="stylesheet" type="text/css"/>
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"></link>
+         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+             <link href="../resources/css/Layout.css" rel="stylesheet" type="text/css"/>
+         <script>
+                $(document).ready(function() {
+                $(".datepicker").datepicker({
+                  dateFormat: 'dd/mm/yy',
+                  //showOn: "both",
+                  //buttonImage: "/apsw2015cw2/resources/images/background.gif",
+                  buttonImageOnly: true})
+                    });
+          </script>
+    </h:head>
+    <h:body>
+         <center><h:outputText value="#{projectmonitoringController.milestoneStatus}" id="okmessages" style="color: green;font-size: 20px;" /></center>
+        <h:form id="form" enctype="multipart/form-data">
+            <h:outputText value="#{milestoneController.currentDate}" >
+     <f:convertDateTime dateStyle="full" pattern="yyyy-MM-dd HH:mm:ss"/>
+</h:outputText>
+            <div class="Container">
+                <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+                <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Ojo Emmanuel</li></ul></div>
+
+            <div class="inner">
+                <div class="NavPanel">
+                <div class="NavPanelin">
+                    <p class="NavList"><h:commandLink id="editlnk" value="Edit Registration"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="projectidealnk" value="Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Project Idea Allocation"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Motoring" action="#{projectmonitoringController.displayProjectMonitoringModule()}" immediate="true"></h:commandLink></p>
+                </div>
+                </div>
+                <div class="Content">
+                    <p class="titleParag"><span class="title">Milestone Details</span></p>
+                    <table  width="100%" border="1" cellpadding="5" cellspacing="0" align="center">
+                    <tbody>
+                        <tr>
+                            <td>Milestone Number:</td>
+                            <td colspan="2">
+                                <h:outputText value="#{milestoneController.mt.milestonetemplateid}" id="milestonetemplateid" >
+                                </h:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Milestone Title:</td>
+                            <td colspan="2">
+                                <h:outputText value="#{milestoneController.mt.milestonetemplatetitle}" id="milestonetemplatetitle" style="width: 282px;">
+                                </h:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Active Due:</td>
+                            <td>
+                                <h:inputText value="#{milestoneTemplateController.mt.milestonetemplateactivedate}" id="from" class="from" style="width: 282px" styleClass="from" required="true"  requiredMessage="Startdate is required." >
+                                </h:inputText>
+                                <h:message for="from" style=" font-size: 12px; color:red"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Due Date:</td>
+                            <td>
+                                <h:inputText value="#{milestoneTemplateController.mt.milestonetemplateduedate}" id="to" class="to" styleClass="to" style="width: 282px" required="true" requiredMessage="Enddate is required." >
+                                </h:inputText>
+                                <h:message for="to" style=" font-size: 12px; color:red"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Milestone Description:</td>
+                            <td colspan="2">
+                                <h:outputText value="#{milestoneController.mt.milestonetemplatedesc}" >
+                                </h:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>File Attachment:</td>
+                            <td>
+                                <h:inputFile id="file" value="#{milestoneController.mi.filepart}"/>                   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Comment:</td>
+                            <td colspan="2">
+                                <h:inputTextarea value="#{milestoneController.mi.submissioncomments}" id="feedback"  cols="50" rows="5"  requiredMessage="middlename is required" validatorMessage="only letters allowed.">        
+                                </h:inputTextarea>
+                            </td>
+                        </tr>     
+                        <tr>
+                            <td colspan="3" align="center"><h:commandButton value="Submit" action="#{milestoneController.dosubmitMilestone()}"/>&nbsp;<h:commandButton value="Cancel" action="#{personController.showContactList()}" immediate="true"/></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                </div>
+                </div>
+        </h:form>
+    </h:body>
+</html>
+

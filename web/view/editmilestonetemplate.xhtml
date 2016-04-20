@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Students and Units Management System</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"></link>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link href="../resources/css/Layout.css" rel="stylesheet" type="text/css"/>
+        <script>
+        $(document).ready(function() {
+        //$(".datepicker").datepicker({
+         //dateFormat: 'dd/mm/yy',
+         //showOn: "both",
+         //buttonImage: "/apsw2015cw2/resources/images/background.gif",
+         //buttonImageOnly: true})
+         $( ".from" ).datepicker({
+           //defaultDate: "+1w",
+           dateFormat: 'dd/mm/yy',
+           changeMonth: true,
+           numberOfMonths: 3,
+           onClose: function( selectedDate ) {
+             $( ".to" ).datepicker( "option", "minDate", selectedDate );
+           }
+         });
+         $( ".to" ).datepicker({
+           //defaultDate: "+1w",
+           dateFormat: 'dd/mm/yy',
+           changeMonth: true,
+           numberOfMonths: 3,
+           onClose: function( selectedDate ) {
+             $( ".from" ).datepicker( "option", "maxDate", selectedDate );
+           }
+         });
+         })
+        </script>
+    </h:head>
+    <h:body>    
+        <h:form>
+            <div class="Container">
+            <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+            <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Kitithat Sasikarn</li></ul></div>
+            <div class="inner">
+            <div class="NavPanel">
+            <div class="NavPanelin">
+                <p class="NavList"><h:commandLink id="editlnk" value="Edit Registration"></h:commandLink></p>
+                <p class="NavList"><h:commandLink id="projectidealnk" value="Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Project Idea Allocation"></h:commandLink></p>
+                <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Motoring" action="#{milestoneTemplateController.displayProjectmonitoringModule()}" immediate="true"></h:commandLink></p>
+            </div>
+            </div>
+            <div class="Content"> 
+            <center><p><span class="title">Edit Milestone</span></p></center>
+            <table  border="1" cellpadding="5" cellspacing="0" align="center" width="100%">
+                <tbody>
+                    <tr>
+                        
+                        <td>Milestone Title:</td>
+                        <td>
+                            <h:inputText value="#{milestoneTemplateController.mt.milestonetemplatetitle}" id="milestonetemplatetitle" class="InputTest" style="width: 282px" required="true" requiredMessage="Milestone Title is required."> 
+                            </h:inputText>
+                            <h:message for="milestonetemplatetitle" style=" font-size: 12px; color:red"/>
+                        </td>
+           
+                    </tr>
+                    <tr>
+                        <td>Active Due:</td>
+                        <td>
+                            <h:inputText value="#{milestoneTemplateController.mt.milestonetemplateactivedate}" id="from" class="from" style="width: 282px" styleClass="from" required="true"  requiredMessage="Startdate is required." >
+                            </h:inputText>
+                            <h:message for="from" style=" font-size: 12px; color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Due Date:</td>
+                        <td>
+                            <h:inputText value="#{milestoneTemplateController.mt.milestonetemplateduedate}" id="to" class="to" styleClass="to" style="width: 282px" required="true" requiredMessage="Enddate is required." >
+                            </h:inputText>
+                            <h:message for="to" style=" font-size: 12px; color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Milestone Description:</td>
+                        <td>
+                            <h:inputTextarea value="#{milestoneTemplateController.mt.milestonetemplatedesc}" id="milestonetemplatedesc"  cols="30" rows="10" required="true" style="width: 282px"  requiredMessage="Milestone Description is required." >       
+                            </h:inputTextarea>
+                            <h:message for="milestoneDescription" style=" font-size: 12px; color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <h:inputHidden value="#{milestoneTemplateController.mt.milestonetemplateid}" id="milestonetemplateid"/>
+                        <td align="center"><h:commandButton value="Update Milestone" action="#{milestoneTemplateController.editMilestonetemplate()}"></h:commandButton></td>
+                        <td align="center"><h:commandButton value="Cancel" action="#{milestoneTemplateController.displayProjectMonitoringModule()}"></h:commandButton></td>
+                    </tr>
+                </tbody>
+            </table>
+           </div>
+           </div>
+           </div>
+
+        </h:form>    
+    </h:body>
+</html>
+
