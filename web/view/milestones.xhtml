@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Students and Units Management System</title>
+        <link href="../resources/css/Layout.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+        <h:body>
+            //11
+        <h:form>
+            <div class="Container">
+            <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+            <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Kitithat Sasikarn</li></ul></div>
+            <div class="inner">
+            <div class="NavPanel">
+            <div class="NavPanelin">
+                <p class="NavList"><h:commandLink id="editlnk" value="Edit Registration"></h:commandLink></p>
+                <p class="NavList"><h:commandLink id="projectidealnk" value="Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Project Idea Allocation"></h:commandLink></p>
+                <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Motoring" action="#{projectmonitoringController.displayProjectMonitoringModule()}" immediate="true"></h:commandLink></p>
+            </div>
+            </div>
+            <div class="Content">    
+                <br/>
+                <br/><p class="titleParag"><span class="title">Active milestone List</span></p>
+                <br/>
+                <center>
+                    <h:outputText value="#{milestoneController.milestoneStatus}" id="okmessages" style="color: green;font-size: 20px;" />
+                <h:dataTable binding="#{table}" value="#{milestoneTemplateController.getAllActiveMilestonetemplate()}" var="milestonetemplate" width="100%" border="1" >
+                    <h:column>
+                        <f:facet name="header">Milestone Title</f:facet>
+                        #{milestonetemplate.milestonetemplatetitle}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Milestone Description</f:facet>
+                        #{milestonetemplate.milestonetemplatedesc}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Active Due</f:facet>
+                        #{milestonetemplate.milestonetemplateactivedate}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Due Date</f:facet>
+                        #{milestonetemplate.milestonetemplateduedate}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandLink value="Submit" action="#{milestoneController.submitmilestonepage(milestonetemplate)}" target="_blank">
+                        </h:commandLink>
+                    </h:column>            
+               
+                </h:dataTable>  
+                </center>    
+            </div> 
+            </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
