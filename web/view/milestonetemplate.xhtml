@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link href="../resources/css/Layout.css" rel="stylesheet" type="text/css"/>
+  <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
   <script>
    $(document).ready(function() {
    //$(".datepicker").datepicker({
@@ -42,8 +42,7 @@
         <h:form>
         <div class="Container">
                 <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
-                <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Kitithat Sasikarn</li></ul></div>
-                <div class="inner">
+                <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>                        <div class="inner">
                 <div class="NavPanel">
                 <div class="NavPanelin">
                     <p class="NavList"><h:commandLink id="editlnk" value="Edit Registration"></h:commandLink></p>
@@ -60,7 +59,7 @@
                     <tr>
                         <td>Milestone Title:</td>
                         <td>
-                            <h:inputText value="#{milestoneTemplateController.mt.milestonetemplatetitle}" id="milestonetemplatetitle" class="InputTest" style="width: 282px" required="true" requiredMessage="Milestone Title is required."> 
+                            <h:inputText value="#{milestoneTemplateController.mt.mttitle}" id="milestonetemplatetitle" class="InputTest" style="width: 282px" required="true" requiredMessage="Milestone Title is required."> 
                             </h:inputText>
                             <h:message for="milestonetemplatetitle" style=" font-size: 12px; color:red"/>
                         </td>
@@ -68,7 +67,8 @@
                     <tr>
                         <td>Active Due:</td>
                         <td>
-                            <h:inputText value="#{milestoneTemplateController.mt.milestonetemplateactivedate}" id="from" class="from" style="width: 282px" styleClass="from" required="true"  requiredMessage="Startdate is required." >
+                            <h:inputText value="#{milestoneTemplateController.mt.mtactivedate}" id="from" class="from" style="width: 282px" styleClass="from" required="true"  requiredMessage="Startdate is required." >
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:inputText>
                             <h:message for="from" style=" font-size: 12px; color:red"/>
                         </td>
@@ -76,25 +76,16 @@
                     <tr>
                         <td>Due Date:</td>
                         <td>
-                            <h:inputText value="#{milestoneTemplateController.mt.milestonetemplateduedate}" id="to" class="to" styleClass="to" style="width: 282px" required="true" requiredMessage="Enddate is required." >
+                            <h:inputText value="#{milestoneTemplateController.mt.mtduedate}" id="to" class="to" styleClass="to" style="width: 282px" required="true" requiredMessage="Enddate is required." >
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:inputText>
                             <h:message for="to" style=" font-size: 12px; color:red"/>
                         </td>
                     </tr>
                     <tr>
-                        <td>Group Students:</td>
-                        <td>
-                        <h:selectOneMenu value="#{milestoneTemplateController.mt.milestonetemplategroupstudents}">
-                            <f:selectItem itemValue="2015-2016" itemLabel="2015-2016" />
-                            <f:selectItem itemValue="2014-2015" itemLabel="2014-2015" />
-                            <f:selectItem itemValue="2013-2014" itemLabel="2013-2014" />			
-                        </h:selectOneMenu>	
-                        </td>                
-                    </tr>
-                    <tr>
                         <td>Milestone Description:</td>
                         <td>
-                            <h:inputTextarea value="#{milestoneTemplateController.mt.milestonetemplatedesc}" id="milestoneDescription"  cols="30" rows="10" required="true" style="width: 282px"  requiredMessage="Milestone Description is required." >       
+                            <h:inputTextarea value="#{milestoneTemplateController.mt.mtdesc}" id="milestoneDescription"  cols="30" rows="10" required="true" style="width: 282px"  requiredMessage="Milestone Description is required." >       
                             </h:inputTextarea>
                             <h:message for="milestoneDescription" style=" font-size: 12px; color:red"/>
                         </td>
@@ -108,46 +99,36 @@
         <center><h:outputText value="#{milestoneTemplateController.milestoneTemplateStatus}" id="okmessages" style="color: green;font-size: 20px;" /></center>
                 <center>
             
-                <c:if test="#{not empty milestoneTemplateController.allMilestonetemplate}">
-                    <h:dataTable binding="#{table}" value="#{milestoneTemplateController.allMilestonetemplate}" var="Milestonetemplate" width="100%" border="1" >
+                    <c:if test="#{not empty milestoneTemplateController.allMilestonetemplate}">
+                        <h:dataTable binding="#{table}" value="#{milestoneTemplateController.allMilestonetemplate}" var="Milestonetemplate" width="100%" border="1" styleClass="fixed-size">
                     <h:column>
                         <f:facet name="header">Milestone Title</f:facet>
-                        #{Milestonetemplate.milestonetemplatetitle}
+                        #{Milestonetemplate.mttitle}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Milestone Description</f:facet>
-                        #{Milestonetemplate.milestonetemplatedesc}
+                        #{Milestonetemplate.mtdesc}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Active Date</f:facet>
-                        #{Milestonetemplate.milestonetemplateduedate}
+                        <h:outputText value="#{Milestonetemplate.mtactivedate}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Due Date</f:facet>
-                        #{Milestonetemplate.milestonetemplateactivedate}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Group Student</f:facet>
-                        #{Milestonetemplate.milestonetemplategroupstudents}
-                    </h:column>
+                        <h:outputText value="#{Milestonetemplate.mtduedate}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </h:column>          
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandLink value="View" action="#{milestoneTemplateController.showDetails(Milestonetemplate)}" target="_blank" immediate="true">
-                            <f:param id="showDetails" name="showDetails" value="#{Milestonetemplate.milestonetemplateid}" />
-                        </h:commandLink>
-                        ||
-                        <h:commandLink value="Edit" action="#{milestoneTemplateController.showeditMilestonetemplate(Milestonetemplate)}" target="_blank" immediate="true">
-                            <f:param id="showeditMilestonetemplate" name="showeditMilestonetemplate" value="#{Milestonetemplate.milestonetemplateid}" />
-                        </h:commandLink>
-                    </h:column>            
-                    <h:column>
-                        <h:commandButton value="View" action="#{milestoneTemplateController.showDetails(Milestonetemplate)}" immediate="true"></h:commandButton>
-                        <h:commandButton value="Edit" action="#{milestoneTemplateController.showeditMilestonetemplate(Milestonetemplate)}" immediate="true"></h:commandButton>
+                        <h:commandButton value="Edit" action="#{milestoneTemplateController.showeditMilestonetemplate(Milestonetemplate)}"  immediate="true" ></h:commandButton>
                         <h:commandButton value="Delete" action="#{milestoneTemplateController.removeMilestonetemplate(Milestonetemplate)}" immediate="true" onclick="if (!confirm('Are you sure?')) return false"></h:commandButton>
                     </h:column>
                     </h:dataTable>  
                 </c:if>
-                <c:if test="#{empty milestoneTemplateController.allMilestonetemplate}">
+                    <c:if test="#{empty milestoneTemplateController.allMilestonetemplate}">
                         <h:outputText value="No DATA" escape="false" />
                 </c:if>
                 </center>    

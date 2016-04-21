@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"></link>
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <link href="../resources/css/Layout.css" rel="stylesheet" type="text/css"/>
+        <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>  
         <script>
         $(document).ready(function() {
         //$(".datepicker").datepicker({
@@ -41,7 +41,7 @@
         <h:form>
             <div class="Container">
             <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
-            <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Kitithat Sasikarn</li></ul></div>
+            <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>
             <div class="inner">
             <div class="NavPanel">
             <div class="NavPanelin">
@@ -59,7 +59,7 @@
                         
                         <td>Milestone Title:</td>
                         <td>
-                            <h:inputText value="#{milestoneTemplateController.mt.milestonetemplatetitle}" id="milestonetemplatetitle" class="InputTest" style="width: 282px" required="true" requiredMessage="Milestone Title is required."> 
+                            <h:inputText value="#{milestoneTemplateController.mt.mttitle}" id="milestonetemplatetitle" class="InputTest" style="width: 282px" required="true" requiredMessage="Milestone Title is required."> 
                             </h:inputText>
                             <h:message for="milestonetemplatetitle" style=" font-size: 12px; color:red"/>
                         </td>
@@ -68,7 +68,8 @@
                     <tr>
                         <td>Active Due:</td>
                         <td>
-                            <h:inputText value="#{milestoneTemplateController.mt.milestonetemplateactivedate}" id="from" class="from" style="width: 282px" styleClass="from" required="true"  requiredMessage="Startdate is required." >
+                            <h:inputText value="#{milestoneTemplateController.mt.mtactivedate}" id="from" class="from" style="width: 282px" styleClass="from" required="true"  requiredMessage="Startdate is required." >
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                             </h:inputText>
                             <h:message for="from" style=" font-size: 12px; color:red"/>
                         </td>
@@ -76,7 +77,8 @@
                     <tr>
                         <td>Due Date:</td>
                         <td>
-                            <h:inputText value="#{milestoneTemplateController.mt.milestonetemplateduedate}" id="to" class="to" styleClass="to" style="width: 282px" required="true" requiredMessage="Enddate is required." >
+                            <h:inputText value="#{milestoneTemplateController.mt.mtduedate}" id="to" class="to" styleClass="to" style="width: 282px" required="true" requiredMessage="Enddate is required." >
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                             </h:inputText>
                             <h:message for="to" style=" font-size: 12px; color:red"/>
                         </td>
@@ -84,15 +86,15 @@
                     <tr>
                         <td>Milestone Description:</td>
                         <td>
-                            <h:inputTextarea value="#{milestoneTemplateController.mt.milestonetemplatedesc}" id="milestonetemplatedesc"  cols="30" rows="10" required="true" style="width: 282px"  requiredMessage="Milestone Description is required." >       
+                            <h:inputTextarea value="#{milestoneTemplateController.mt.mtdesc}" id="milestonetemplatedesc"  cols="30" rows="10" required="true" style="width: 282px"  requiredMessage="Milestone Description is required." >       
                             </h:inputTextarea>
                             <h:message for="milestoneDescription" style=" font-size: 12px; color:red"/>
                         </td>
                     </tr>
                     <tr>
-                        <h:inputHidden value="#{milestoneTemplateController.mt.milestonetemplateid}" id="milestonetemplateid"/>
+                        <h:inputHidden value="#{milestoneTemplateController.mt.id}" id="milestonetemplateid"/>
                         <td align="center"><h:commandButton value="Update Milestone" action="#{milestoneTemplateController.editMilestonetemplate()}"></h:commandButton></td>
-                        <td align="center"><h:commandButton value="Cancel" action="#{milestoneTemplateController.displayProjectMonitoringModule()}"></h:commandButton></td>
+                        <td align="center"><h:commandButton value="Cancel" action="#{milestoneTemplateController.showeditMilestonetemplatepage()}"></h:commandButton></td>
                     </tr>
                 </tbody>
             </table>

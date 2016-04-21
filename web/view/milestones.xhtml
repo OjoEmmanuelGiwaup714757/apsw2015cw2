@@ -5,14 +5,13 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Students and Units Management System</title>
-        <link href="../resources/css/Layout.css" rel="stylesheet" type="text/css"/>
+        <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>    
     </h:head>
         <h:body>
-            //11
         <h:form>
             <div class="Container">
             <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
-            <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Kitithat Sasikarn</li></ul></div>
+            <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>
             <div class="inner">
             <div class="NavPanel">
             <div class="NavPanelin">
@@ -28,27 +27,31 @@
                 <br/>
                 <center>
                     <h:outputText value="#{milestoneController.milestoneStatus}" id="okmessages" style="color: green;font-size: 20px;" />
-                <h:dataTable binding="#{table}" value="#{milestoneTemplateController.getAllActiveMilestonetemplate()}" var="milestonetemplate" width="100%" border="1" >
+                    <h:dataTable binding="#{table}" value="#{milestoneTemplateController.getAllActiveMilestonetemplate()}" var="milestonetemplate" border="1" styleClass="fixed-size" width="100%">
                     <h:column>
                         <f:facet name="header">Milestone Title</f:facet>
-                        #{milestonetemplate.milestonetemplatetitle}
+                        #{milestonetemplate.mttitle}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Milestone Description</f:facet>
-                        #{milestonetemplate.milestonetemplatedesc}
+                        #{milestonetemplate.mtdesc}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Active Due</f:facet>
-                        #{milestonetemplate.milestonetemplateactivedate}
+                        <h:outputText value="#{milestonetemplate.mtactivedate}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Due Date</f:facet>
-                        #{milestonetemplate.milestonetemplateduedate}
+                        <h:outputText value="#{milestonetemplate.mtduedate}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Action</f:facet>
-                        <h:commandLink value="Submit" action="#{milestoneController.submitmilestonepage(milestonetemplate)}" target="_blank">
-                        </h:commandLink>
+                        <h:commandButton value="View" action="#{milestoneController.viewsubmitedmilestone(milestonetemplate)}" onclick="this.form.target='_blank'" ></h:commandButton>
+                        <h:commandButton value="Submit" action="#{milestoneController.submitmilestonepage(milestonetemplate)}" onclick="this.form.target='_blank'" ></h:commandButton>
                     </h:column>            
                
                 </h:dataTable>  

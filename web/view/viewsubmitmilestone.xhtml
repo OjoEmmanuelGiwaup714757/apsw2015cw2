@@ -28,7 +28,7 @@
                 </div>
                 <div class="Content">
                     <p class="titleParag"><span class="title">Milestone Details</span></p>
-                    <table  width="100%" border="1" cellpadding="5" cellspacing="0" align="center" class="fixed-size">
+                    <table  width="100%" border="1" cellpadding="5" cellspacing="0" class="fixed-size">
                     <tbody>
                         <tr>
                             <td>Milestone Number:</td>
@@ -47,7 +47,7 @@
                         <tr>
                             <td>Active Due:</td>
                             <td colspan="2">
-                                <h:outputText value="#{milestoneController.mt.mtactivedate}">
+                                <h:outputText value="#{milestoneController.mt.mtactivedate}" id="from" class="from" >
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </h:outputText>
                                 <h:message for="from" style=" font-size: 12px; color:red"/>
@@ -56,7 +56,7 @@
                         <tr>
                             <td>Due Date:</td>
                             <td colspan="2">
-                                <h:outputText value="#{milestoneController.mt.mtduedate}" >
+                                <h:outputText value="#{milestoneController.mt.mtduedate}" id="to" class="to" >
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </h:outputText>
                                 <h:message for="to" style=" font-size: 12px; color:red"/>
@@ -65,25 +65,29 @@
                         <tr>
                             <td>Milestone Description:</td>
                             <td colspan="2">
-                                <h:outputText value="#{milestoneController.mt.mtdesc}">
+                                <h:outputText value="#{milestoneController.mt.mtdesc}" >
                                 </h:outputText>
                             </td>
                         </tr>
                         <tr>
                             <td>File Attachment:</td>
-                            <td  colspan="2">
+                            <td colspan="2">
                                 <h:inputFile id="file" value="#{milestoneController.file}"/>                   
                             </td>
                         </tr>
-                        <tr>
-                            <td>Comment:</td>
-                            <td colspan="2">
-                                <h:inputTextarea value="#{milestoneController.mi.comment}" id="submissioncomments"  cols="50" rows="5"  requiredMessage="middlename is required" validatorMessage="only letters allowed.">        
-                                </h:inputTextarea>
+                        <tr >
+                            <td colspan="3">
+                                <h:dataTable binding="#{mitable}" value="#{milestoneController.milestoneByID}" var="mitable" width="100%" border="1" styleClass="fixed-size">
+                                <h:column>
+                                    <f:facet name="header">Milestone comment</f:facet>
+                                    #{mitable.comment}
+                                </h:column>
+                                </h:dataTable>
                             </td>
-                        </tr>     
+                        </tr>
                         <tr>
-                            <td colspan="3" align="center"><h:commandButton value="Submit" action="#{milestoneController.dosubmitMilestone()}"/>&nbsp;<h:commandButton value="Cancel" action="#{personController.showContactList()}" immediate="true"/></td>
+                            <td colspan="3" align="center"><h:commandButton value="Submit" action="#{milestoneController.dosubmitMilestone()}"/>&nbsp;
+                                <h:commandButton value="Cancel" action="#{milestoneController.submitmilestonepage()}" immediate="true"/></td>
                         </tr>
                     </tbody>
                     </table>
