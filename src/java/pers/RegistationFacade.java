@@ -41,12 +41,7 @@ public class RegistationFacade extends AbstractFacade<Registation> {
         q.setParameter("username", username);
         return q.getResultList();
     }
-    
-    public List<Registation> findMemberByUserId(Long userid) {
-        Query q = em.createQuery("SELECT r FROM Registation r WHERE r.id = :userid");
-        q.setParameter("userid", userid);
-        return q.getResultList();
-    }
+   
     //get supervisor
     public List<Registation> findSupervisors() {
         Query q = em.createQuery("SELECT r FROM Registation r WHERE r.isSupervisor=2");

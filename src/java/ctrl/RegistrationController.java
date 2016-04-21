@@ -35,10 +35,8 @@ public class RegistrationController {
 
     private String passwordConfirm;
     private String loginerroemsg;
-    private String registrationSuccess;
     ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
     Map<String, Object> sessionMap = externalContext.getSessionMap();
-    private Long idname;
 
     public Registation getR() {
         return r;
@@ -64,22 +62,6 @@ public class RegistrationController {
         this.loginerroemsg = loginerroemsg;
     }
 
-    public String getRegistrationSuccess() {
-        return registrationSuccess;
-    }
-
-    public void setRegistrationSuccess(String registrationSuccess) {
-        this.registrationSuccess = registrationSuccess;
-    }
-
-    public Long getIdname() {
-        return idname;
-    }
-
-    public void setIdname(Long idname) {
-        this.idname = idname;
-    }
-
     public void clearAllFields() {
         r.setFirstName("");
         r.setPassword("");
@@ -88,18 +70,7 @@ public class RegistrationController {
         r.setUsername("");
     }
 
-    public String doAddUser() {
-        if (r.getPassword().equals(this.passwordConfirm)) {
-            rs.createNewUser(r);
-            registrationSuccess = "You are successfully registered.";
-            clearAllFields();
-            return "";
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Password and Password Confirm field must be the same!"));
-            return "";
-        }
-    }
-
+   
     public String dologin() {
         if ((rs.memberLoginStatusB(r).equals("Sucess"))) {
 //            List<Registration> userList = rs.fetchMemberByUsernamePassword(r);
@@ -130,31 +101,9 @@ public class RegistrationController {
         return "Hi, " + (String) sessionMap.get("loginusername");
     }
 
-    public String updatePassword() {
-        Map<String, Object> sessionMap = externalContext.getSessionMap();
-        idname = (Long) sessionMap.get("userregcode");
-//        r.(idname);
-        return "";
-
-    }
 
     public String doLogout() {
         return "/index?faces-redirect=true";
     }
     
-    public String loadOrganisation() {
-        return "/view/organisation?face-redirect=true";
-    }
-
-    public String displayUpdatePassword() {
-        return "/view/updatePassword?faces-redirect=true";
-    }
-
-    public String displayUpdatePersonalInfo() {
-        return "/view/updatePersonalInfo?faces-redirect=true";
-    }
-    
-    public String loadSwitchBoard(){
-        return "/view/switchboard?faces-redirect=true";
-    }
 }

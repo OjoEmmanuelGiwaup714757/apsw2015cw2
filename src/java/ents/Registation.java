@@ -54,8 +54,6 @@ public class Registation implements Serializable {
     @OneToMany(mappedBy = "study")
     private List<Shortlist> students;
     @ManyToOne
-    private Organisation belongOrg;
-    @ManyToOne
     private Department belongDepart;
     @OneToMany(mappedBy = "ideaowner")
     private List<Project> myideas;
