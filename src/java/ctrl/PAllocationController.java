@@ -10,9 +10,12 @@ import ents.Shortlist;
 import ents.Project;
 import ents.Registation;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -35,13 +38,17 @@ public class PAllocationController extends MessageController {
     private Registation supervisor = new Registation();
     private Registation moderator = new Registation();
     private Registation student = new Registation();
+    private long userstatus;
+    private Long iscoordinator;
+    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+    Map<String, Object> sessionMap = externalContext.getSessionMap();
 
     public List<Shortlist> getAllShortlist() {
-        List<Shortlist> lls=pas.getAllShortlist();        
+        List<Shortlist> lls = pas.getAllShortlist();
         return lls;
     }
-    
-        public List<Shortlist> sortShortlistBystudent() {      
+
+    public List<Shortlist> sortShortlistBystudent() {
         return pas.sortShortlistBystudent();
     }
 
@@ -128,8 +135,25 @@ public class PAllocationController extends MessageController {
         }
     }
 
-    public String displayprojectAllocationModule() {
-        return "/view/selectidea?faces-redirect=true";
+    public String displaySelectionModule() {
+        userstatus = (Long) sessionMap.get("userstatus");
+        iscoordinator = (Long) sessionMap.get("iscoordinator");
+        if (userstatus == 1) {
+            return "/view/selectidea?faces-redirect=true";
+        } else if (iscoordinator == 2) {
+            return "/view/coordinatorselectidea?faces-redirect=true";
+        } else {
+            return "";
+        }
     }
-
+    
+        public String displayAllcationModule() {
+        iscoordinator = (Long) sessionMap.get("iscoordinator");
+        if (iscoordinator == 2) {
+            return "/view/coordinatorAllocation?faces-redirect=true";
+        }else
+            return "";
+    }
 }
+
+

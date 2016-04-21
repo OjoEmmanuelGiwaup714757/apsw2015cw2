@@ -45,6 +45,7 @@ public class Registation implements Serializable {
     private Long suspensionstatus;//1--not suspensin 2--suspension
     private Date accountcreateddate;
     private Date accountconfirmeddate;
+    private Long userstatus;
 
     @OneToMany(mappedBy = "supervise")
     private List<Shortlist> supervisors;
@@ -156,12 +157,28 @@ public class Registation implements Serializable {
         this.isModerator = isModerator;
     }
 
+    public Long getUserstatus() {
+        return userstatus;
+    }
+
+    public void setUserstatus(Long userstatus) {
+        this.userstatus = userstatus;
+    }
+
     public Long getPersonstatusid() {
         return personstatusid;
     }
 
     public void setPersonstatusid(Long personstatusid) {
         this.personstatusid = personstatusid;
+    }
+
+    public Long getIscoordinator() {
+        return iscoordinator;
+    }
+
+    public void setIscoordinator(Long iscoordinator) {
+        this.iscoordinator = iscoordinator;
     }
 
     public List<Shortlist> getSupervisors() {

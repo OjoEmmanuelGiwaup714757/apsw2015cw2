@@ -13,14 +13,14 @@
         <h:form id="myForm">
             <div class="Container">
                 <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
-                <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Ojo Emmanuel</li></ul></div>
+                <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>
 
                 <div class="inner">
                     <div class="NavPanel">
                         <div class="NavPanelin">
-                            <p class="NavList"><h:commandLink id="editlnk" value="Edit Registration"></h:commandLink></p>
-                            <p class="NavList"><h:commandLink id="projectidealnk" value="Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
-                            <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Project Idea Allocation" action="#{pAllocationController.displayprojectAllocationModule()}" immediate="true"></h:commandLink></p>
+                            <p class="NavList"><h:commandLink id="editlnk" value="Project Idea List" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                            <p class="NavList"><h:commandLink id="projectidealnk" value="Project Idea and Superviosr Selection" action="#{pAllocationController.displaySelectionModule()}" immediate="true"></h:commandLink></p>
+                            <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Project Idea and Superviosr Allocation" action="#{pAllocationController.displayAllcationModule()}" immediate="true"></h:commandLink></p>
                             <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Motoring"></h:commandLink></p>
                         </div>
                     </div>

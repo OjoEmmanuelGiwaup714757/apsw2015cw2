@@ -74,6 +74,9 @@ public class RegistrationController {
                 sessionMap.put("useruname", m.getUsername());
                 sessionMap.put("useremail", m.getEmailaddr());
                 sessionMap.put("loginusername", m.getFirstName() + " " + m.getSurname()); 
+                sessionMap.put("userstatus",m.getUserstatus());
+                sessionMap.put("Personstatusid", m.getPersonstatusid());
+                sessionMap.put("iscoordinator", m.getIscoordinator());
             }             
                 return "/view/switchboard?faces-redirect=true";
         } else {
