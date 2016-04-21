@@ -41,6 +41,38 @@ public class Organisation implements Serializable {
         this.id = id;
     }
 
+    public String getOrganisationname() {
+        return organisationname;
+    }
+
+    public void setOrganisationname(String organisationname) {
+        this.organisationname = organisationname;
+    }
+
+    public String getOrganisationaccountdesc() {
+        return organisationaccountdesc;
+    }
+
+    public void setOrganisationaccountdesc(String organisationaccountdesc) {
+        this.organisationaccountdesc = organisationaccountdesc;
+    }
+
+    public String getOrganisationaddress() {
+        return organisationaddress;
+    }
+
+    public void setOrganisationaddress(String organisationaddress) {
+        this.organisationaddress = organisationaddress;
+    }
+
+    public String getOrganisationpostcode() {
+        return organisationpostcode;
+    }
+
+    public void setOrganisationpostcode(String organisationpostcode) {
+        this.organisationpostcode = organisationpostcode;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -63,7 +95,7 @@ public class Organisation implements Serializable {
 
     @Override
     public String toString() {
-        return "ents.Organisatioin[ id=" + id + " ]";
+        return this.getOrganisationname();
     }
     
 }
