@@ -55,6 +55,14 @@ public class Shortlist implements Serializable {
         this.status = status;
     }
 
+    public Date getSubmissiondate() {
+        return submissiondate;
+    }
+
+    public void setSubmissiondate(Date submissiondate) {
+        this.submissiondate = submissiondate;
+    }
+
 
 
     public Project getIdeapicked() {

@@ -18,11 +18,8 @@
                 <div class="inner">
                     <div class="NavPanel">
                         <div class="NavPanelin">
-                                                        <p class="NavList"><h:commandLink id="projectidealnk" value="Project Idea List" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                            <p class="NavList"><h:commandLink id="projectidealnk" value="Project Idea List" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
                             <p class="NavList"><h:commandLink id="editlnk" value="Project Idea and Superviosr Selection" action="#{pAllocationController.displaySelectionModule()}" immediate="true"></h:commandLink></p>
-<!--
-                            <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Project Idea Allocation" action="#{pAllocationController.displayprojectAllocationModule()}" immediate="true"></h:commandLink></p>
-                            <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Motoring"></h:commandLink></p>-->
                         </div>
                     </div>
                     <div class="Content">
@@ -45,7 +42,11 @@
                             <h:commandButton value="Save Project Choice" action="#{pAllocationController.dosaveprojectchoice()}"/>
                         </h:panelGrid>
                         <h3 class="smallhead">Project Idea Choices List</h3>
-                        <h:dataTable value="#{pAllocationController.allShortlist}" var="asl"  styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd-row,order-table-even-row">
+                        <h:dataTable value="#{pAllocationController.findShortlistBystudent()}" var="asl"  styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd-row,order-table-even-row">
+                            <h:column>
+                                <f:facet name="header">project title</f:facet>
+                                <h:outputText value="#{asl.ideapicked.title}"/>
+                            </h:column>
                             <h:column>
                                 <f:facet name="header">Supervisor</f:facet>
                                 <h:outputText value="#{asl.supervise.fullName}"/>
@@ -55,8 +56,10 @@
                                 <h:outputText value="#{asl.moderate.fullName}"/>
                             </h:column>
                             <h:column>
-                                <f:facet name="header">project title</f:facet>
-                                <h:outputText value="#{asl.ideapicked.title}"/>
+                                <f:facet name="header">Submission Date</f:facet>
+                                <h:outputText value="#{asl.submissiondate}">
+                                              <f:convertDateTime type="time" pattern="HH:mm:ss dd/MM/yyyy"></f:convertDateTime>
+                                </h:outputText>
                             </h:column>
                         </h:dataTable>
                     </div>

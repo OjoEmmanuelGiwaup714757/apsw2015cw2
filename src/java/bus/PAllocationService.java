@@ -85,8 +85,8 @@ public class PAllocationService {
         //return slf.findShortlistAvailable();
         return slf.findAll();
     }
-        public List<Shortlist> sortShortlistBystudent() {
-        return slf.sortShortlistBystudent();
+        public List<Shortlist> findShortlistBystudent(long userid) {
+        return slf.findShortlistBystudent(userid);
     }
 
     public void allocateProjectChoice(Shortlist sl) {

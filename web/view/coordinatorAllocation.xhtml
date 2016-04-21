@@ -13,7 +13,7 @@
         <h:form id="myForm">
             <div class="Container">
                 <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
-                               <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>
+                <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>
 
                 <div class="inner">
                     <div class="NavPanel">
@@ -29,10 +29,12 @@
                         <h3 class="smallhead">Project Idea Choices List</h3>
                         <h:dataTable binding="#{table}" value="#{pAllocationController.allShortlist}" var="asl" styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd-row,order-table-even-row">
                             <h:column>
-                                <f:facet name="header">student
-                                    <!--<h:commandLink action="#{pAllocationController.sortShortlistBystudent()}">student</h:commandLink>-->
-                                </f:facet>
+                                <f:facet name="header">student</f:facet>
                                 <h:outputText value="#{asl.study.fullName}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">project title</f:facet>
+                                <h:outputText value="#{asl.ideapicked.title}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Supervisor</f:facet>
@@ -43,8 +45,10 @@
                                 <h:outputText value="#{asl.moderate.fullName}"/>
                             </h:column>
                             <h:column>
-                                <f:facet name="header">project title</f:facet>
-                                <h:outputText value="#{asl.ideapicked.title}"/>
+                                <f:facet name="header">Submission Date</f:facet>
+                                <h:outputText value="#{asl.submissiondate}">
+                                    <f:convertDateTime type="time" pattern="HH:mm:ss dd/MM/yyyy"></f:convertDateTime>
+                                </h:outputText>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">project status</f:facet>

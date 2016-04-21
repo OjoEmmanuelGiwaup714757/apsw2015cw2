@@ -77,6 +77,7 @@ public class RegistrationController {
                 sessionMap.put("userstatus",m.getUserstatus());
                 sessionMap.put("Personstatusid", m.getPersonstatusid());
                 sessionMap.put("iscoordinator", m.getIscoordinator());
+                sessionMap.put("student",m);
             }             
                 return "/view/switchboard?faces-redirect=true";
         } else {

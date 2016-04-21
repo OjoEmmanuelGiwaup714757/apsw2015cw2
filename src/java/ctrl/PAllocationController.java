@@ -9,6 +9,8 @@ import bus.PAllocationService;
 import ents.Shortlist;
 import ents.Project;
 import ents.Registation;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
@@ -39,7 +41,10 @@ public class PAllocationController extends MessageController {
     private Registation moderator = new Registation();
     private Registation student = new Registation();
     private long userstatus;
-    private Long iscoordinator;
+    private long iscoordinator;
+    private long userid;
+    Calendar calendar = Calendar.getInstance();
+    Date projectselectionDateObject= new Date(calendar.getTime().getTime());
     ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
     Map<String, Object> sessionMap = externalContext.getSessionMap();
 
@@ -48,8 +53,9 @@ public class PAllocationController extends MessageController {
         return lls;
     }
 
-    public List<Shortlist> sortShortlistBystudent() {
-        return pas.sortShortlistBystudent();
+    public List<Shortlist> findShortlistBystudent() {
+        userid=(Long)sessionMap.get("userregcode");
+        return pas.findShortlistBystudent(userid);
     }
 
     public List<Project> getAllProject() {
@@ -102,6 +108,9 @@ public class PAllocationController extends MessageController {
             sl.setIdeapicked(p);
             sl.setSupervise(supervisor);
             sl.setModerate(moderator);
+            student= (Registation)sessionMap.get("student");
+            sl.setStudy(student);
+            sl.setSubmissiondate(projectselectionDateObject);
         }
         pas.addnewideaschoice(sl);
         addInfo(sl.getIdeapicked().getTitle() + " supervised by " + sl.getSupervise().getFullName() + " and moderated by " + sl.getModerate().getFullName() + " added successfully!");
@@ -116,6 +125,7 @@ public class PAllocationController extends MessageController {
             sl.setSupervise(supervisor);
             sl.setModerate(moderator);
             sl.setStudy(student);
+            sl.setSubmissiondate(projectselectionDateObject);
         }
         pas.addnewideaschoicebycoordinator(sl);
         addInfo(sl.getIdeapicked().getTitle() + " supervised by " + sl.getSupervise().getFullName() + " and moderated by " + sl.getModerate().getFullName() + " for " + sl.getStudy().getFullName() + " added successfully!");

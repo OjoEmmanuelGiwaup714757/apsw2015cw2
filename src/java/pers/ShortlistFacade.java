@@ -37,8 +37,9 @@ public class ShortlistFacade extends AbstractFacade<Shortlist> {
         q.executeUpdate();
     }
 
-    public List<Shortlist> sortShortlistBystudent() {
-        Query q = em.createQuery("SELECT sl FROM Shortlist sl ORDER BY sl.study.firstName desc");
+    public List<Shortlist> findShortlistBystudent(long userid) {
+        Query q = em.createQuery("SELECT sl FROM Shortlist sl WHERE sl.study.id=:userid");
+        q.setParameter("userid", userid);
         return q.getResultList();
     }
 //    public List<Shortlist> findShortlistAvailable() {
