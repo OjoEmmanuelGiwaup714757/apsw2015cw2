@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Students and Units Management System</title>
+        <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
+        <link href="../resourses/css/table-style.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form id="myForm">
+            <div class="Container">
+                <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+                <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Ojo Emmanuel</li></ul></div>
+
+                <div class="inner">
+                    <div class="NavPanel">
+                        <div class="NavPanelin">
+                             <p class="NavList"><h:commandLink id="updatepassword" value="Update Password" action="#{registrationController.displayUpdatePassword()}" immediate="true"></h:commandLink></p>
+                            <p class="NavList"><h:commandLink id="updateinfo" value="Update Personal Info" action="#{registrationController.displayUpdatePersonalInfo()}" immediate="true"></h:commandLink></p>
+                        </div>
+                    </div>
+                    <div class="Content">
+                        <table width="100%" border="1" cellpadding="5" cellspacing="0">
+                            <tbody>                     
+                                <tr>
+                                    <td>First Name</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.firstName}" id="forename" class="InputTest" style="width: 250px" required="true" requiredMessage="firstname is required" validatorMessage="only letters allowed.">
+                                        </h:inputText>
+                                        <h:message for="forename" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Middle Name</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.middlename}" id="middlename" class="InputTest" style="width: 250px" requiredMessage="middlename is required" validatorMessage="only letters allowed.">
+                                        </h:inputText>
+                                        <h:message for="middlename" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Surname</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.surname}" id="surname" class="InputTest" style="width: 250px" required="true" requiredMessage="surname is required" validatorMessage="only letters allowed.">
+                                        </h:inputText>
+                                        <h:message for="surname" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Contact No</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.phoneno}" id="phoneNo" class="InputTest" style="width: 250px" required="false" validatorMessage="appropriate uk phone number expected.">
+                                        <f:validateRegex pattern="^(\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)(44)\)?[\s-]?)?\(?0?(?:\)[\s-]?)?([1-9]\d{1,4}\)?[\d[\s-]]+)((?:x|ext\.?|\#)\d{3,4})?$"/>
+                                        </h:inputText>
+                                        <h:message for="phoneNo" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.emailaddr}" id="email" class="InputTest" style="width: 250px" required="true" requiredMessage="email is required" validatorMessage="email should include @ in it.">
+                                        <f:validateRegex pattern="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"/>
+                                        </h:inputText>
+                                        <h:message for="email" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><h:commandButton value="Update" action="#{registrationController.doUpdatePersonalInfo()}"/>&nbsp;<h:commandButton value="Cancel" immediate="true" action="#{registrationController.loadSwitchBoard()}"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </h:form>        
+    </h:body>
+</html>
+

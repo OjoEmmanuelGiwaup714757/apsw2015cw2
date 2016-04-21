@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>SUMS User Registration</title>
+        <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
+        <link href="../resourses/css/table-style.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="Container">
+                <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+                <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="" action="#{registrationController.doLogout()}" immediate="true"/></li></ul></div>
+
+                <div class="inner">
+                    <div class="NavPanel">
+                        <div class="NavPanelin">
+                            <p style="margin:0px; border-top-left-radius:5px; border-top-right-radius:5px; background-color:#551a8b; color:white; font-weight:bolder; font-size: 11px; text-align: center">Registration</p>
+                            
+                        </div>
+                    </div>
+                    <div class="Content">
+                        <table width="100%" border="1" cellpadding="5" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.firstName}" id="forename" class="InputTest" style="width: 250px" required="true" requiredMessage="firstname is required" validatorMessage="only letters allowed.">
+                                        </h:inputText>
+                                        <h:message for="forename" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Middle Name</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.middlename}" id="middlename" class="InputTest" style="width: 250px" requiredMessage="middlename is required" validatorMessage="only letters allowed.">
+                                        </h:inputText>
+                                        <h:message for="middlename" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Surname</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.surname}" id="surname" class="InputTest" style="width: 250px" required="true" requiredMessage="surname is required" validatorMessage="only letters allowed.">
+                                        </h:inputText>
+                                        <h:message for="surname" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Username</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.username}" id="username" class="InputTest" style="width: 250px" required="true" requiredMessage="username is required" validatorMessage="Alphanumeric username of lenght 2-20 expected.">
+                                            <f:validateRegex pattern="^[a-z0-9_-]{6,20}$"/>
+                                        </h:inputText>
+                                        <h:message for="username" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td colspan="2">
+                                        <h:inputSecret value="#{registationBean.r.password}" id="password" class="InputTest" style="width: 250px" required="true" requiredMessage="password is required to be at least 8 characters and include A-Z, a-z and 0-9" validatorMessage="password between 8 - 20 lenght with at least an uppercase and a lowercase letter and a number.">
+                                            <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20})"/>
+                                        </h:inputSecret>
+                                        <h:message for="password" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Confirm Password</td>
+                                    <td colspan="2">
+                                        <h:inputSecret id="confirmPassword" value="#{registationBean.passwordconfirm}" class="InputTest" style="width: 250px" required="true" requiredMessage="please re-enter password" validatorMessage="The confirm password must match what you entered as password.">
+                                            <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20})"/>
+                                        </h:inputSecret>
+                                        <h:message for="confirmPassword" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Contact No</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.phoneno}" id="phoneNo" class="InputTest" style="width: 250px" required="false">
+                                            <!--<f:validateRegex pattern="^(\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)(44)\)?[\s-]?)?\(?0?(?:\)[\s-]?)?([1-9]\d{1,4}\)?[\d[\s-]]+)((?:x|ext\.?|\#)\d{3,4})?$"/>-->
+                                        </h:inputText>
+                                        <h:message for="phoneNo" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>User Status</td>
+                                    <td colspan="2">
+                                        <h:selectOneRadio value="#{registationBean.r.personstatusid}" id="userstatus" >
+                                            <f:selectItem itemValue="1" itemLabel="Student" />
+                                            <f:selectItem itemValue="2" itemLabel="Staff" />
+                                            <f:selectItem itemValue="3" itemLabel="External" />
+                                        </h:selectOneRadio>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HEMIS</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{registationBean.r.studentId}" id="studentId" class="InputTest" style="width: 250px" required="false" requiredMessage="student id is required" validatorMessage="only numbers allowed.">
+                                        </h:inputText>
+                                        <h:message for="studentId" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td>Organisation Name</td>
+                                        <td colspan="2">
+                                            <h:selectOneMenu value="#{registationBean.belongOrg}" id="organisationcode">
+                                                <f:selectItems value="#{organisationController.itemsAvailableSelectOneOrg}" itemValue="#{belongOrg.id}"/>
+    <!--                                            <c:forEach var="org" items="#{organisationController.allOrganisation}">              
+                                                    <f:selectItem itemValue="${org.id}" itemLabel="${org.organisationname}" />
+                                                </c:forEach>-->
+                                            </h:selectOneMenu>&nbsp;&nbsp;
+                                            <h:commandButton value="Add Organisation" immediate="true" action="#{registationBean.loadOrganisation()}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td colspan="2">
+                                            <h:inputText value="#{registationBean.r.emailaddr}" id="email" class="InputTest" style="width: 250px" required="true" requiredMessage="email is required" validatorMessage="email should include @ in it.">
+                                                <f:validateRegex pattern="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"/>
+                                            </h:inputText>
+                                            <h:message for="email" style=" font-size: 8px; color:red"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><h:commandButton value="Add" action="#{registationBean.doAddUser()}"/>&nbsp;<h:commandButton value="Cancel" action="#{registationBean.loadIndex()}" immediate="true"/></td>
+                                    </tr>                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </h:form>        
+    </h:body>
+</html>  
+

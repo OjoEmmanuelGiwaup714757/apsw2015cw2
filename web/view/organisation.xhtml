@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Add / Edit Organisation</title>
+        <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
+
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="Container">
+                <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+                <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="blank" value=""/></li></ul></div>
+                <div class="inner">
+                    <div class="NavPanel">
+                        <div class="NavPanelin">
+                            <p style="margin:0px; border-top-left-radius:5px; border-top-right-radius:5px; background-color:#551a8b; color:white; font-weight:bolder; font-size: 11px; text-align: center">Organisations</p>
+                        </div>
+                    </div>
+                    <div class="Content">
+                        <p class="titleParag0"><span class="title0">Add Organisation</span></p>
+                        <table width="100%" border="1" cellpadding="5" cellspacing="0">
+                            <tbody>                     
+                                <tr>
+                                    <td>Organisation Name</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{organisationController.o.organisationname}" id="organisationName" class="InputTest" style="width: 250px" required="true" requiredMessage="organisation name is required" validatorMessage="only text allowed.">
+                                        </h:inputText>
+                                        <h:message for="organisationName" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Organisation Description</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{organisationController.o.organisationaccountdesc}" id="organisationDesc" class="InputTest" style="width: 250px" required="false" requiredMessage="organisation desc is required" validatorMessage="only text allowed.">
+                                        </h:inputText>
+                                        <h:message for="organisationDesc" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Organisation Address</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{organisationController.o.organisationaddress}" id="organisationAddr" class="InputTest" style="width: 250px" required="true" requiredMessage="organisation address is required" validatorMessage="only text allowed.">
+                                        </h:inputText>
+                                        <h:message for="organisationAddr" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Organisation Post Code</td>
+                                    <td colspan="2">
+                                        <h:inputText value="#{organisationController.o.organisationpostcode}" id="organisationPostCode" class="InputTest" style="width: 250px" required="true" requiredMessage="organisation post code is required" validatorMessage="appropriate postcode required.">
+                                            <f:validateRegex pattern="^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$"/>
+                                        </h:inputText>
+                                        <h:message for="organisationPostCode" style=" font-size: 8px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><h:commandButton value="Add" action="#{organisationController.doAddOrganisation()}"/>&nbsp;<h:commandButton value="Cancel" immediate="true" action="#{organisationController.loadRegistration}"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h:outputText value="#{organisationController.addOrganisationSuccess}" style="color: green; font-size: 12px; font-weight: bold" />
+                        <br />
+                        <p class="titleParag00"><span class="title00">Organisations List</span></p>
+                        <!-- begin of idea grid -->
+                        <h:dataTable binding="#{table}" value="#{organisationController.allOrganisation}" var="gas" border="2" class="regularTable">
+                            <h:column>
+                                <f:facet name="header">S/No</f:facet>
+                                    #{table.rowIndex+1}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Description</f:facet>
+                                <h:outputText value="#{gas.organisationaccountdesc}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Address</f:facet>
+                                <h:outputText value="#{gas.organisationaddress}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Name</f:facet>
+                                <h:outputText value="#{gas.organisationname}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+
+                </div>
+            </div>
+        </h:form>        
+    </h:body>
+</html>   
+
