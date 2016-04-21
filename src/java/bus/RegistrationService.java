@@ -22,6 +22,13 @@ public class RegistrationService {
     // "Insert Code > Add Business Method")
     @EJB
     private RegistationFacade rf;
+    
+        //Register a user
+    public Registation createNewUser(Registation r) {
+        rf.create(r);
+        return  r;
+    }
+    
     //member can login status
     public String memberLoginStatus(Registation r) {
     List<Registation> list = rf.findMemberByUsernamePassword(r.getUsername(),r.getPassword());
