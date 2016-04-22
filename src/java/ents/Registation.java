@@ -63,8 +63,6 @@ public class Registation implements Serializable {
 //    @OneToMany(mappedBy = "milestoneowner")
 //    private List<Milestones> mymilestones;
     
-    @OneToMany(mappedBy = "milestonetemplateowner")
-    private List<Milestonetemplate> mymilestonetemplate;
 
 
     public Long getId() {

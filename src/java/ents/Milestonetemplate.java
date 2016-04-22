@@ -31,7 +31,6 @@ public class Milestonetemplate implements Serializable {
     private Long mtstatus;//1--not available 2--available. decided by activedate and duedate
     private Date mtactivedate;
     private Date mtduedate;
-    private Long mtauthority;
     
     @OneToMany(mappedBy="templateassign")
     private List<Cohorts> templatepicker;
@@ -74,57 +73,5 @@ public class Milestonetemplate implements Serializable {
     public String toString() {
         return "ents.Milestonetemplate[ id=" + id + " ]";
     }
-
-    public String getMttitle() {
-        return mttitle;
-    }
-
-    public void setMttitle(String mttitle) {
-        this.mttitle = mttitle;
-    }
-
-    public String getMtdesc() {
-        return mtdesc;
-    }
-
-    public void setMtdesc(String mtdesc) {
-        this.mtdesc = mtdesc;
-    }
-
-    public Long getMtstatus() {
-        return mtstatus;
-    }
-
-    public void setMtstatus(Long mtstatus) {
-        this.mtstatus = mtstatus;
-    }
-
-    public Date getMtactivedate() {
-        return mtactivedate;
-    }
-
-    public void setMtactivedate(Date mtactivedate) {
-        this.mtactivedate = mtactivedate;
-    }
-
-    public Date getMtduedate() {
-        return mtduedate;
-    }
-
-    public void setMtduedate(Date mtduedate) {
-        this.mtduedate = mtduedate;
-    }
-
-    public Long getMtauthority() {
-        return mtauthority;
-    }
-
-    public void setMtauthority(Long mtauthority) {
-        this.mtauthority = mtauthority;
-    }
-    
-    
-    
-    
 
 }
