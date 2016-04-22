@@ -232,7 +232,10 @@ public class ProjectideasContoller {
         this.pi = projectidea;
         return "ideadetails";
     }
-
+    public String showDetailsUnprocess(Project projectidea) {
+        this.pi = projectidea;
+        return "ideaapproval";
+    }
     public String updateProjectIdea(){
         this.pi = pis.updatePIdea(pi);
         return "pisearch";
@@ -274,8 +277,11 @@ public class ProjectideasContoller {
                 return "/view/submitidea?faces-redirect=true";
 //                  return "submitidea";
         }
-          public String displayProjectIdeaApproval() {
-                return "/view/ideaapproval?faces-redirect=true";
+         public String displayProjectIdeaApproval() {
+        return "/view/ideaapproval?faces-redirect=true";
+    }
+          public String displayProjectIdeaProcessing() {
+                return "/view/ideaprocessing?faces-redirect=true";
         }
         public List<Project> getIdeasUntreated() {
             return pis.findAllIdeas();
@@ -445,5 +451,8 @@ public class ProjectideasContoller {
             emailheader = "SUMS Project Idea Submission Confirmation for " + pi.getTitle();
             fireEmail("kikigiwa@gmail.com", emailheader, "Testigng! Testing!!\nThis is an email from our SUMS Project Idea module. :)");
             return "";
+        }
+                public String backSwitchboardPage(){
+        return "/view/switchboard?faces-redirect=true";
         }
 }

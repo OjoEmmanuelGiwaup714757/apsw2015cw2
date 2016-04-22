@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Students and Unit Management System</title>
+        <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
+        <link href="../resourses/css/table-style.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="Container">
+                <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+                <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>
+
+            <div class="inner">
+                <div class="NavPanel">
+                <div class="NavPanelin">
+                    <p style="margin:0px; border-top-left-radius:5px; border-top-right-radius:5px; background-color:#551a8b; color:white; font-weight:bolder; font-size: 11px; text-align: center">Project Idea</p>
+                    <p class="NavList"><h:commandLink id="editlnk" value="Submit Project Idea"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="projectidealnk" value="Edit Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Search Project Idea"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Processing"></h:commandLink></p>
+                </div>
+                </div>
+                <div class="Content">
+                    <p class="titleParag0"><span class="title0">UnProcessed Project Ideas List</span></p>                
+            <h:dataTable binding="#{table}" value="#{projectideasContoller.searchAllIdeas}" var="idea" border="2" class="regularTable">
+               <h:column>                   
+                    <f:facet name="header">S/No</f:facet>
+                    #{table.rowIndex+1}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputText value="#{idea.title}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    <h:outputText value="#{idea.pidesc}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Aim</f:facet>
+                    <h:outputText value="#{idea.aim}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Academic Question</f:facet>
+                    <h:outputText value="#{idea.academicquestion}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:commandLink value="Edit" immediate="true" action="#{projectideasContoller.showDetailsUnprocess(idea)}" />
+                        <f:param id="idea_id" name="registration_id" value="#{idea.id}" />
+                </h:column>            
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:commandLink value="Delete" immediate="true" onclick="if (!confirm('Are you sure?')) return false" />                
+                </h:column>
+            </h:dataTable>
+            <!-- end of idea grid -->
+    </div>
+             
+            </div>
+           </div>
+        </h:form>        
+    </h:body>
+</html>   
+

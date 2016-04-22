@@ -13,11 +13,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -44,7 +51,7 @@ public class PAllocationController extends MessageController {
     private long iscoordinator;
     private long userid;
     Calendar calendar = Calendar.getInstance();
-    Date projectselectionDateObject= new Date(calendar.getTime().getTime());
+    Date projectselectionDateObject = new Date(calendar.getTime().getTime());
     ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
     Map<String, Object> sessionMap = externalContext.getSessionMap();
 
@@ -54,7 +61,7 @@ public class PAllocationController extends MessageController {
     }
 
     public List<Shortlist> findShortlistBystudent() {
-        userid=(Long)sessionMap.get("userregcode");
+        userid = (Long) sessionMap.get("userregcode");
         return pas.findShortlistBystudent(userid);
     }
 
@@ -108,7 +115,7 @@ public class PAllocationController extends MessageController {
             sl.setIdeapicked(p);
             sl.setSupervise(supervisor);
             sl.setModerate(moderator);
-            student= (Registation)sessionMap.get("student");
+            student = (Registation) sessionMap.get("student");
             sl.setStudy(student);
             sl.setSubmissiondate(projectselectionDateObject);
         }
@@ -137,6 +144,9 @@ public class PAllocationController extends MessageController {
     public void allocateProjectChoice(Shortlist sl) {
         if (sl.getStudy().getPersonstatusid() != 2 && sl.getIdeapicked().getStatus() != 3) {
             pas.allocateProjectChoice(sl);
+            String mymail=(String) sessionMap.get("useremail");
+            String emailheader = "SUMS Project Idea Allocation Confirmation for " + sl.getIdeapicked().getTitle()+" and "+sl.getStudy().getFullName();
+            fireEmail(mymail, emailheader, "This is an email from our SUMS Project Idea  Allocation module. )");
             addInfo(sl.getIdeapicked().getTitle() + " has been allocated to " + sl.getStudy().getFullName() + " successfully!");
         } else if (sl.getStudy().getPersonstatusid() == 2) {
             addInfo(sl.getStudy().getFullName() + " had been allocated already!");
@@ -156,14 +166,63 @@ public class PAllocationController extends MessageController {
             return "";
         }
     }
-    
-        public String displayAllcationModule() {
+
+    public String displayAllcationModule() {
         iscoordinator = (Long) sessionMap.get("iscoordinator");
         if (iscoordinator == 2) {
             return "/view/coordinatorAllocation?faces-redirect=true";
-        }else
+        } else {
             return "";
+        }
     }
+
+    //email code segment begins here
+    //public static void fireEmail(final String toEmail, final String body) {
+    public static void fireEmail(final String toEmail, final String msgcaption, final String body) {
+        new Thread() {
+            public void run() {
+                try {
+                    //please change the email and password by ur gmail account and password
+                    final String emailusername = "kikigiwa@gmail.com";
+                    final String emailpassword = "wealthy";
+                    Properties props = new Properties();
+                    props.put("mail.smtp.auth", "true");
+                    props.put("mail.smtp.starttls.enable", "true");
+                    props.put("mail.imap.ssl.enable", "true");
+                    props.put("mail.smtp.host", "smtp.gmail.com");
+                    props.put("mail.smtp.port", "587");
+                    Session session = Session.getInstance(props,
+                            new javax.mail.Authenticator() {
+                        @Override
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(
+                                    emailusername, emailpassword);
+                        }
+                    });
+
+                    MimeMessage msg = new MimeMessage(session);
+                    // set message headers
+                    msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+                    msg.addHeader("format", "flowed");
+                    msg.addHeader("Content-Transfer-Encoding", "8bit");
+                    msg.setFrom(new InternetAddress("kikigiwa@gmail.com", "Group 1"));
+                    msg.setReplyTo(InternetAddress.parse(
+                            "kikigiwa@gmail.com", false));
+                    //msg.setSubject("Please Confirm your SUMS Registration - Group X", "UTF-8");
+                    msg.setSubject(msgcaption, "UTF-8");
+                    msg.setText(body, "UTF-8");
+                    msg.setSentDate(new Date());
+                    msg.setRecipients(Message.RecipientType.TO,
+                            InternetAddress.parse(toEmail, false));
+                    System.out.println("Message is ready");
+                    Transport.send(msg);
+                    System.out.println("End =======================");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
 }
-
-

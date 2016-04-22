@@ -5,6 +5,7 @@
  */
 package ctrl;
 
+import bus.RegistrationService;
 import ents.Registation;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -22,6 +23,8 @@ public class RegistationBean extends AbstractController<Registation, Registation
 
     @EJB
     private RegistationFacade rf;
+    private RegistrationService rs;
+    private Registation r = new Registation();
 
     public RegistationFacade getRf() {
         return rf;
@@ -33,6 +36,14 @@ public class RegistationBean extends AbstractController<Registation, Registation
     public RegistationBean() {
     }
 
+    public Registation getR() {
+        return r;
+    }
+
+    public void setR(Registation r) {
+        this.r = r;
+    }
+
     public SelectItem[] getItemsAvailableSelectOneBySupervisor() {
         return getSelectItems(rf.findSupervisors(), true);
     }
@@ -40,9 +51,11 @@ public class RegistationBean extends AbstractController<Registation, Registation
     public SelectItem[] getItemsAvailableSelectOneByModerator() {
         return getSelectItems(rf.findModerators(), true);
     }
+
     public SelectItem[] getItemsAvailableSelectOneByStudent() {
         return getSelectItems(rf.findStudents(), true);
     }
+
     @Override
     public RegistationFacade getFacade() {
         return rf;

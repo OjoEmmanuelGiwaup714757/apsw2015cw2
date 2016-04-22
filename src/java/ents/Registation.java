@@ -54,6 +54,8 @@ public class Registation implements Serializable {
     @OneToMany(mappedBy = "study")
     private List<Shortlist> students;
     @ManyToOne
+    private Organisation belongOrg;
+    @ManyToOne
     private Department belongDepart;
     @OneToMany(mappedBy = "ideaowner")
     private List<Project> myideas;
@@ -62,9 +64,6 @@ public class Registation implements Serializable {
 
 //    @OneToMany(mappedBy = "milestoneowner")
 //    private List<Milestones> mymilestones;
-    
-
-
     public Long getId() {
         return id;
     }
@@ -79,6 +78,14 @@ public class Registation implements Serializable {
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
+    }
+
+    public Long getRegistrationstatus() {
+        return registrationstatus;
+    }
+
+    public void setRegistrationstatus(Long registrationstatus) {
+        this.registrationstatus = registrationstatus;
     }
 
     public String getFirstName() {
@@ -177,6 +184,22 @@ public class Registation implements Serializable {
         this.iscoordinator = iscoordinator;
     }
 
+    public Date getAccountcreateddate() {
+        return accountcreateddate;
+    }
+
+    public void setAccountcreateddate(Date accountcreateddate) {
+        this.accountcreateddate = accountcreateddate;
+    }
+
+    public Date getAccountconfirmeddate() {
+        return accountconfirmeddate;
+    }
+
+    public void setAccountconfirmeddate(Date accountconfirmeddate) {
+        this.accountconfirmeddate = accountconfirmeddate;
+    }
+
     public List<Shortlist> getSupervisors() {
         return supervisors;
     }
@@ -199,6 +222,14 @@ public class Registation implements Serializable {
 
     public void setStudents(List<Shortlist> students) {
         this.students = students;
+    }
+
+    public Organisation getBelongOrg() {
+        return belongOrg;
+    }
+
+    public void setBelongOrg(Organisation belongOrg) {
+        this.belongOrg = belongOrg;
     }
 
     public String getFullName() {
