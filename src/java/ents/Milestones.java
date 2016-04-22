@@ -34,11 +34,9 @@ public class Milestones implements Serializable {
     private Milestonetemplate belongtemplate;
 
     @ManyToOne
-    private Shortlist finalproject;
-//    @ManyToOne
-//    private Registation milestoneowner;
-    
-    @OneToMany(mappedBy="belongfeedback")
+    private Registation milestoneowner;
+
+    @OneToMany(mappedBy = "belongfeedback")
     private List<Milestonefeedback> myfeedback;
 
     public Long getId() {
@@ -72,6 +70,46 @@ public class Milestones implements Serializable {
     @Override
     public String toString() {
         return "ents.Milestones[ id=" + id + " ]";
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Date getSubmissiondate() {
+        return submissiondate;
+    }
+
+    public void setSubmissiondate(Date submissiondate) {
+        this.submissiondate = submissiondate;
+    }
+
+    public Registation getMilestoneowner() {
+        return milestoneowner;
+    }
+
+    public void setMilestoneowner(Registation milestoneowner) {
+        this.milestoneowner = milestoneowner;
+    }
+
+    public Milestonetemplate getBelongtemplate() {
+        return belongtemplate;
+    }
+
+    public void setBelongtemplate(Milestonetemplate belongtemplate) {
+        this.belongtemplate = belongtemplate;
     }
 
 }

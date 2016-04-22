@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/src/java/ents/Cohorts.java</file>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/web/view/switchboard.xhtml</file>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/src/java/ctrl/MilestoneTemplateController.java</file>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/src/java/ents/Milestonetemplate.java</file>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/src/java/ents/Milestones.java</file>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/web/view/milestonetemplate.xhtml</file>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/src/conf/persistence.xml</file>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/src/java/ents/Registation.java</file>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/src/java/ents/Shortlist.java</file>
+            <file>file:/C:/Users/Administrator/Documents/apsw2015cw2/web/view/milestones.xhtml</file>
+        </group>
     </open-files>
 </project-private>

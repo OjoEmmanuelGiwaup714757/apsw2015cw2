@@ -34,8 +34,8 @@ public class Cohorts implements Serializable {
     @OneToMany(mappedBy = "belongCoh")
     private List<Registation> UserCohort;
     
-    @ManyToOne
-    private Milestonetemplate templateassign;
+//    @ManyToOne
+//    private Milestonetemplate templateassign;
 
     public Long getId() {
         return id;

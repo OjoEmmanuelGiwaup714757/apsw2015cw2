@@ -6,135 +6,135 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Project Monitoring</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
-  <script>
-   $(document).ready(function() {
-   //$(".datepicker").datepicker({
-    //dateFormat: 'dd/mm/yy',
-    //showOn: "both",
-    //buttonImage: "/apsw2015cw2/resources/images/background.gif",
-    //buttonImageOnly: true})
-    $( ".from" ).datepicker({
-      //defaultDate: "+1w",
-      dateFormat: 'dd/mm/yy',
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( ".to" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( ".to" ).datepicker({
-      //defaultDate: "+1w",
-      dateFormat: 'dd/mm/yy',
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( ".from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-    })
-  </script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
+        <script>
+            $(document).ready(function () {
+                //$(".datepicker").datepicker({
+                //dateFormat: 'dd/mm/yy',
+                //showOn: "both",
+                //buttonImage: "/apsw2015cw2/resources/images/background.gif",
+                //buttonImageOnly: true})
+                $(".from").datepicker({
+                    //defaultDate: "+1w",
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    numberOfMonths: 3,
+                    onClose: function (selectedDate) {
+                        $(".to").datepicker("option", "minDate", selectedDate);
+                    }
+                });
+                $(".to").datepicker({
+                    //defaultDate: "+1w",
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    numberOfMonths: 3,
+                    onClose: function (selectedDate) {
+                        $(".from").datepicker("option", "maxDate", selectedDate);
+                    }
+                });
+            })
+        </script>
     </h:head>
     <h:body>
         <h:form>
-        <div class="Container">
+            <div class="Container">
                 <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
                 <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>                        <div class="inner">
-                <div class="NavPanel">
-                <div class="NavPanelin">
-                    <p class="NavList"><h:commandLink id="editlnk" value="Edit Registration"></h:commandLink></p>
-                    <p class="NavList"><h:commandLink id="projectidealnk" value="Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
-                    <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Project Idea Allocation"></h:commandLink></p>
-                    <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Motoring"></h:commandLink></p>
+                    <div class="NavPanel">
+                        <div class="NavPanelin">
+                            <p style="margin:0px; border-top-left-radius:5px; border-top-right-radius:5px; background-color:#551a8b; color:white; font-weight:bolder; font-size: 11px; text-align: center">Project Monitoring</p>
+                            <p class="NavList"><h:commandLink id="switchboard" value="Back to Front Page" action="#{registrationController.loadSwitchboard()}" immediate="true"></h:commandLink></p>
+                        </div>
+                    </div>
+                    <div class="Content">
+
+                        <center><p><span class="title">Milestone Template</span></p></center>    
+                        <table  border="1" cellpadding="5" cellspacing="0" align="center" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td>Milestone Title:</td>
+                                    <td>
+                                        <h:inputText value="#{milestoneTemplateController.mt.mttitle}" id="milestonetemplatetitle" class="InputTest" style="width: 282px" required="true" requiredMessage="Milestone Title is required."> 
+                                        </h:inputText>
+                                        <h:message for="milestonetemplatetitle" style=" font-size: 12px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Active Due:</td>
+                                    <td>
+                                        <h:inputText value="#{milestoneTemplateController.mt.mtactivedate}" id="from" class="from" style="width: 282px" styleClass="from" required="true"  requiredMessage="Startdate is required." >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:inputText>
+                                        <h:message for="from" style=" font-size: 12px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Due Date:</td>
+                                    <td>
+                                        <h:inputText value="#{milestoneTemplateController.mt.mtduedate}" id="to" class="to" styleClass="to" style="width: 282px" required="true" requiredMessage="Enddate is required." >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:inputText>
+                                        <h:message for="to" style=" font-size: 12px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Milestone Description:</td>
+                                    <td>
+                                        <h:inputTextarea value="#{milestoneTemplateController.mt.mtdesc}" id="milestoneDescription"  cols="30" rows="10" required="true" style="width: 282px"  requiredMessage="Milestone Description is required." >       
+                                        </h:inputTextarea>
+                                        <h:message for="milestoneDescription" style=" font-size: 12px; color:red"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><h:commandButton value="Add Milestone" action="#{milestoneTemplateController.doaddMilestonetemplate()}"></h:commandButton></td>
+                                    <td align="center"><h:commandButton value="Cancel" action="#{milestoneTemplateController.resetallInputfields()}"></h:commandButton></td>
+                                </tr>
+                            </tbody>
+                        </table><h:outputText value="&lt;br/&gt;" escape="false" />
+                        <center><h:outputText value="#{milestoneTemplateController.milestoneTemplateStatus}" id="okmessages" style="color: green;font-size: 20px;" /></center>
+                        <center>
+
+                            <c:if test="#{not empty milestoneTemplateController.allMilestonetemplate}">
+                                <h:dataTable binding="#{table}" value="#{milestoneTemplateController.allMilestonetemplate}" var="Milestonetemplate" width="100%" border="1" styleClass="fixed-size">
+                                    <h:column>
+                                        <f:facet name="header">Milestone Title</f:facet>
+                                            #{Milestonetemplate.mttitle}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Milestone Description</f:facet>
+                                            #{Milestonetemplate.mtdesc}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Active Date</f:facet>
+                                        <h:outputText value="#{Milestonetemplate.mtactivedate}">
+                                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Due Date</f:facet>
+                                        <h:outputText value="#{Milestonetemplate.mtduedate}">
+                                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                        </h:outputText>
+                                    </h:column>          
+                                    <h:column>
+                                        <f:facet name="header">Action</f:facet>
+                                        <h:commandButton value="Feedbacks" action="#{milestoneFeedbackController.loadmilestone()}"  immediate="true" ></h:commandButton>
+                                        <h:commandButton value="Edit" action="#{milestoneTemplateController.showeditMilestonetemplate(Milestonetemplate)}"  immediate="true" ></h:commandButton>
+                                        <h:commandButton value="Delete" action="#{milestoneTemplateController.removeMilestonetemplate(Milestonetemplate)}" immediate="true" onclick="if (!confirm('Are you sure?'))
+                                                            return false"></h:commandButton>
+                                    </h:column>
+                                </h:dataTable>  
+                            </c:if>
+                            <c:if test="#{empty milestoneTemplateController.allMilestonetemplate}">
+                                <h:outputText value="No DATA" escape="false" />
+                            </c:if>
+                        </center>    
+                    </div>         
                 </div>
-                </div>
-        <div class="Content">
-        
-        <center><p><span class="title">Milestone Template</span></p></center>    
-        <table  border="1" cellpadding="5" cellspacing="0" align="center" width="100%">
-                <tbody>
-                    <tr>
-                        <td>Milestone Title:</td>
-                        <td>
-                            <h:inputText value="#{milestoneTemplateController.mt.mttitle}" id="milestonetemplatetitle" class="InputTest" style="width: 282px" required="true" requiredMessage="Milestone Title is required."> 
-                            </h:inputText>
-                            <h:message for="milestonetemplatetitle" style=" font-size: 12px; color:red"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Active Due:</td>
-                        <td>
-                            <h:inputText value="#{milestoneTemplateController.mt.mtactivedate}" id="from" class="from" style="width: 282px" styleClass="from" required="true"  requiredMessage="Startdate is required." >
-                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                            </h:inputText>
-                            <h:message for="from" style=" font-size: 12px; color:red"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Due Date:</td>
-                        <td>
-                            <h:inputText value="#{milestoneTemplateController.mt.mtduedate}" id="to" class="to" styleClass="to" style="width: 282px" required="true" requiredMessage="Enddate is required." >
-                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                            </h:inputText>
-                            <h:message for="to" style=" font-size: 12px; color:red"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Milestone Description:</td>
-                        <td>
-                            <h:inputTextarea value="#{milestoneTemplateController.mt.mtdesc}" id="milestoneDescription"  cols="30" rows="10" required="true" style="width: 282px"  requiredMessage="Milestone Description is required." >       
-                            </h:inputTextarea>
-                            <h:message for="milestoneDescription" style=" font-size: 12px; color:red"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center"><h:commandButton value="Add Milestone" action="#{milestoneTemplateController.doaddMilestonetemplate()}"></h:commandButton></td>
-                        <td align="center"><h:commandButton value="Cancel" action="#{milestoneTemplateController.resetallInputfields()}"></h:commandButton></td>
-                    </tr>
-                    </tbody>
-        </table><h:outputText value="&lt;br/&gt;" escape="false" />
-        <center><h:outputText value="#{milestoneTemplateController.milestoneTemplateStatus}" id="okmessages" style="color: green;font-size: 20px;" /></center>
-                <center>
-            
-                    <c:if test="#{not empty milestoneTemplateController.allMilestonetemplate}">
-                        <h:dataTable binding="#{table}" value="#{milestoneTemplateController.allMilestonetemplate}" var="Milestonetemplate" width="100%" border="1" styleClass="fixed-size">
-                    <h:column>
-                        <f:facet name="header">Milestone Title</f:facet>
-                        #{Milestonetemplate.mttitle}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Milestone Description</f:facet>
-                        #{Milestonetemplate.mtdesc}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Active Date</f:facet>
-                        <h:outputText value="#{Milestonetemplate.mtactivedate}">
-                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Due Date</f:facet>
-                        <h:outputText value="#{Milestonetemplate.mtduedate}">
-                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </h:column>          
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:commandButton value="Edit" action="#{milestoneTemplateController.showeditMilestonetemplate(Milestonetemplate)}"  immediate="true" ></h:commandButton>
-                        <h:commandButton value="Delete" action="#{milestoneTemplateController.removeMilestonetemplate(Milestonetemplate)}" immediate="true" onclick="if (!confirm('Are you sure?')) return false"></h:commandButton>
-                    </h:column>
-                    </h:dataTable>  
-                </c:if>
-                    <c:if test="#{empty milestoneTemplateController.allMilestonetemplate}">
-                        <h:outputText value="No DATA" escape="false" />
-                </c:if>
-                </center>    
-        </div>         
-        </div>
-        </div>
+            </div>
         </h:form>        
     </h:body>   
 </html>

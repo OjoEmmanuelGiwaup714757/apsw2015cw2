@@ -12,21 +12,22 @@
          <link href="../resources/css/Layout.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-        <h:form id="form" enctype="multipart/form-data">
+        <h:form enctype="multipart/form-data">
             <div class="Container">
-                <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
-                <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Ojo Emmanuel</li></ul></div>
-
+            <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+            <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>
             <div class="inner">
-                <div class="NavPanel">
-                <div class="NavPanelin">
-                    <p class="NavList"><h:commandLink id="editlnk" value="Edit Registration"></h:commandLink></p>
+            <div class="NavPanel">
+            <div class="NavPanelin">
+                 <p style="margin:0px; border-top-left-radius:5px; border-top-right-radius:5px; background-color:#551a8b; color:white; font-weight:bolder; font-size: 11px; text-align: center">My SUMS</p>
+                    <p class="NavList"><h:commandLink id="editlnk" value="Update Personal Info" ></h:commandLink></p>
                     <p class="NavList"><h:commandLink id="projectidealnk" value="Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
-                    <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Project Idea Allocation"></h:commandLink></p>
-                    <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Motoring" action="#{projectmonitoringController.displayProjectMonitoringModule()}" immediate="true"></h:commandLink></p>
-                </div>
-                </div>
-                <div class="Content">
+                    <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Project Idea Allocation" action="#{pAllocationController.displaySelectionModule()}"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Motoring" action="#{milestoneTemplateController.displayProjectmonitoringModule()}"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="switchboard" value="Back to Front Page" action="#{registrationController.loadSwitchboard()}"></h:commandLink></p>
+            </div>
+            </div>
+            <div class="Content">    
                     <p class="titleParag"><span class="title">Milestone Details</span></p>
                     <table  width="100%" border="1" cellpadding="5" cellspacing="0" class="fixed-size">
                     <tbody>
@@ -69,26 +70,24 @@
                                 </h:outputText>
                             </td>
                         </tr>
-                        <tr>
-                            <td>File Attachment:</td>
-                            <td colspan="2">
-                                <h:inputFile id="file" value="#{milestoneController.file}"/>                   
-                            </td>
-                        </tr>
                         <tr >
                             <td colspan="3">
-                                <h:dataTable binding="#{mitable}" value="#{milestoneController.milestoneByID}" var="mitable" width="100%" border="1" styleClass="fixed-size">
+                                <h:dataTable binding="#{mitable}" value="#{milestoneController.allMilestones}" var="mitable" width="100%" border="1" styleClass="fixed-size">
                                 <h:column>
                                     <f:facet name="header">Milestone comment</f:facet>
                                     #{mitable.comment}
                                 </h:column>
+                                    <h:column>
+                                    <f:facet name="header">File Attachment</f:facet>
+                                     <h:outputLink id="amazonLink" value="#{mitable.filepath}">
+                                        File Attachment
+                                   </h:outputLink>
+                                    
+                                </h:column>
                                 </h:dataTable>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="3" align="center"><h:commandButton value="Submit" action="#{milestoneController.dosubmitMilestone()}"/>&nbsp;
-                                <h:commandButton value="Cancel" action="#{milestoneController.submitmilestonepage()}" immediate="true"/></td>
-                        </tr>
+
                     </tbody>
                     </table>
                 </div>

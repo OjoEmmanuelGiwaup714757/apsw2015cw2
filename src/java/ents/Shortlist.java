@@ -36,8 +36,8 @@ public class Shortlist implements Serializable {
     private Registation moderate;
     @ManyToOne
     private Registation study;
-    @OneToMany(mappedBy="finalproject")
-    private List<Milestones> mymilestone;//final project idea milestone
+//    @OneToMany(mappedBy="finalproject")
+//    private List<Milestones> mymilestone;//final project idea milestone
 
     public Long getId() {
         return id;

@@ -156,6 +156,14 @@ public class RegistrationController {
     public String loadOrganisation() {
         return "/view/organisation?faces-redirect=true";
     }
+    
+    public String loadSwitchboard(){
+        return "/view/switchboard?faces-redirect=true";
+    }
+    
+    public String loadSelectIdea(){
+        return "/view/coordinatorselectidea?faces-redirect=true";
+    }
 
     //email code segment begins here
     //public static void fireEmail(final String toEmail, final String body) {

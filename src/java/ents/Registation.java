@@ -62,8 +62,9 @@ public class Registation implements Serializable {
     @ManyToOne
     private Cohorts belongCoh;
 
-//    @OneToMany(mappedBy = "milestoneowner")
-//    private List<Milestones> mymilestones;
+    @OneToMany(mappedBy = "milestoneowner")
+    private List<Milestones> mymilestones;
+    
     public Long getId() {
         return id;
     }
